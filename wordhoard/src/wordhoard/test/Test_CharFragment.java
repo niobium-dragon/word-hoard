@@ -17,7 +17,7 @@ public class Test_CharFragment {
 	
 	private static boolean canMakeCharFragmentFrom(String s) {
 		try {
-			CharFragment charFragment = new CharFragment(s);
+			new CharFragment(s);
 			return true;
 		} catch (Exception e) {
 			return false;

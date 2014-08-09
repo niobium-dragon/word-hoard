@@ -3,7 +3,6 @@ package wordhoard.dissection;
 import wordhoard.Dissection;
 
 import java.util.List;
-import java.util.regex.*;
 
 public class DissectToChars implements Dissection {
 

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static bard.BardUtil.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,6 +11,7 @@ import org.junit.Test;
 import wordhoard.Dissection;
 import wordhoard.dissection.DissectToChars;
 
+@SuppressWarnings("unused")
 public class Test_DissectToChars {
 
 	@Test
@@ -20,7 +20,7 @@ public class Test_DissectToChars {
 		test1("abc", list("a", "b", "c"));
 		test1("a b\t\t\t\tc", list("a", "b", "c"));
 		test1("Ʊɲɨ", list("Ʊ", "ɲ", "ɨ"));
-		test1("𐅮𨭎", list("𐅮", "𨭎"));
+		test1("𐅮𨭎", list("𐅮", "𨭎")); // Astral characters — and this broke before DissectUtils.split
 	}
 
 	private void test1(String line, List<String> desired) {
