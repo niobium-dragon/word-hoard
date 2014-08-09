@@ -18,7 +18,6 @@ public class Test_CharFragment {
 	private static boolean canMakeCharFragmentFrom(String s) {
 		try {
 			CharFragment charFragment = new CharFragment(s);
-			System.out.printf("∆ cf=%s\n", charFragment);
 			return true;
 		} catch (Exception e) {
 			return false;
