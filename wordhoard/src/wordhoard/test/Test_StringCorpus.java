@@ -19,21 +19,11 @@ public class Test_StringCorpus {
 	public void tearDown() throws Exception {
 	}
 
-	// Some String values that functions might well mess up on.
-	// I could use a Theory here but that's kinda overkill.
-	private static String[] testStrings = new String[]{
-		null, // null often hurts. 
-		"",  // the null string does too.
-		"a",  // one character
-		"something that is not too short", // many chars
-		"ú", // Non-ASCII unicode
-		"Ʊɲɨćǒᵭḗ ɨṩ ĵôʎ", // More exotic unicode
-		"𐄳𐅮𨭎𠬠𝕂😂🀤🃕🄸", // Astral characters
-		};
+	
 	
 	@Test
 	public void testGetBody() {
-		for(String s : testStrings) {
+		for(String s : Constants.strings) {
 			StringCorpus sc = new StringCorpus(s);
 			assertEquals(sc.getBody(), s);
 		}
@@ -43,10 +33,10 @@ public class Test_StringCorpus {
 	public void testSetBody() {
 		StringCorpus sc = new StringCorpus("anything else");
 		// I gather Hamcrest has better array methods but I don't feel like looking now.
-		for(String s : testStrings) {
+		for(String s : Constants.strings) {
 			assertThat(sc.getBody(), not(equalTo(s)));
 		}
-		for(String s : testStrings) {
+		for(String s : Constants.strings) {
 			sc.setBody(s);
 			assertThat(sc.getBody(), is(equalTo(s)));
 		}
@@ -55,7 +45,7 @@ public class Test_StringCorpus {
 
 	@Test
 	public void testToString() {
-		for(String s : testStrings) {
+		for(String s : Constants.strings) {
 			StringCorpus sc = new StringCorpus(s);
 			if (s != null) {
 				assertThat(sc.toString(), containsString(s));
