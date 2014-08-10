@@ -2,6 +2,10 @@ package wordhoard.test;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static bard.BardUtil.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -51,6 +55,13 @@ public class Test_StringCorpus {
 				assertThat(sc.toString(), containsString(s));
 			}
 		}
+	}
+	
+	@Test
+	public void testLines() throws Exception {
+		StringCorpus sc = new StringCorpus( "a\nb\nc");
+		List<String> read = sc.lines().collect(Collectors.toList());
+		assertThat(read, is(equalTo(list("a", "b", "c"))));
 	}
 
 }

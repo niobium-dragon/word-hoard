@@ -1,5 +1,7 @@
 package wordhoard;
 
-public interface Corpus {
+import java.util.stream.Stream;
 
+public interface Corpus {
+	Stream<String> lines();
 }

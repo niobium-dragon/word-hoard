@@ -1,5 +1,8 @@
 package wordhoard.corpus;
 
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
+
 import wordhoard.Corpus;
 
 /*
@@ -26,5 +29,14 @@ public class StringCorpus implements Corpus {
 	public String toString() {
 		return "StringCorpus [body=" + body + "]";
 	}
+
+	private static Pattern newlineRE = Pattern.compile("\n");
+	
+	@Override
+	public Stream<String> lines() {
+		return newlineRE.splitAsStream(this.getBody());
+	}
+	
+	
 	
 }
