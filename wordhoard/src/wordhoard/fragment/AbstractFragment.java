@@ -16,11 +16,19 @@ public class AbstractFragment implements Fragment {
 		return text;
 	}
 
-
-
 	@Override
 	public String text() {
 		return this.text;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return Fragment.equals(this, obj);
+	}
 
+	@Override
+	public int hashCode() {
+		return Fragment.hashCode(this);
+	}
+	
 }

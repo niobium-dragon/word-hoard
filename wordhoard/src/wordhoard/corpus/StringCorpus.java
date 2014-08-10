@@ -11,7 +11,8 @@ import wordhoard.Corpus;
 
 public class StringCorpus implements Corpus {
 	private String body;
-
+	private String name;
+	
 	public String getBody() {
 		return body;
 	}
@@ -20,14 +21,20 @@ public class StringCorpus implements Corpus {
 		this.body = body;
 	}
 
-	public StringCorpus(String body) {
+	@Override
+	public String name() {
+		return this.name;
+	}
+	
+	public StringCorpus(String name, String body) {
 		super();
+		this.name = name;
 		this.body = body;
 	}
 
 	@Override
 	public String toString() {
-		return "StringCorpus [body=" + body + "]";
+		return "StringCorpus [name=" + name + "; body=" + body + "]";
 	}
 
 	private static Pattern newlineRE = Pattern.compile("\n");

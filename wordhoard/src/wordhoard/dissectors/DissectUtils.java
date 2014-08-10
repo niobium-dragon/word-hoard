@@ -1,4 +1,4 @@
-package wordhoard.dissection;
+package wordhoard.dissectors;
 
 import java.util.ArrayList;
 import java.util.Arrays;

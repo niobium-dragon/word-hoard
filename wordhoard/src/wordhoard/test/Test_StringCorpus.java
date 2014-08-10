@@ -28,14 +28,14 @@ public class Test_StringCorpus {
 	@Test
 	public void testGetBody() {
 		for(String s : Constants.strings) {
-			StringCorpus sc = new StringCorpus(s);
+			StringCorpus sc = new StringCorpus("nameless", s);
 			assertEquals(sc.getBody(), s);
 		}
 	}
 
 	@Test
 	public void testSetBody() {
-		StringCorpus sc = new StringCorpus("anything else");
+		StringCorpus sc = new StringCorpus("nameless", "anything else");
 		// I gather Hamcrest has better array methods but I don't feel like looking now.
 		for(String s : Constants.strings) {
 			assertThat(sc.getBody(), not(equalTo(s)));
@@ -50,7 +50,7 @@ public class Test_StringCorpus {
 	@Test
 	public void testToString() {
 		for(String s : Constants.strings) {
-			StringCorpus sc = new StringCorpus(s);
+			StringCorpus sc = new StringCorpus("nameless", s);
 			if (s != null) {
 				assertThat(sc.toString(), containsString(s));
 			}
@@ -59,7 +59,7 @@ public class Test_StringCorpus {
 	
 	@Test
 	public void testLines() throws Exception {
-		StringCorpus sc = new StringCorpus( "a\nb\nc");
+		StringCorpus sc = new StringCorpus("nameless",  "a\nb\nc");
 		List<String> read = sc.lines().collect(Collectors.toList());
 		assertThat(read, is(equalTo(list("a", "b", "c"))));
 	}

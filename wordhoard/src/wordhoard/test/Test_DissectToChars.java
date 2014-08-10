@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import wordhoard.Dissection;
-import wordhoard.dissection.DissectToChars;
+import wordhoard.Dissector;
+import wordhoard.dissectors.DissectToChars;
 
 @SuppressWarnings("unused")
 public class Test_DissectToChars {
@@ -25,7 +25,7 @@ public class Test_DissectToChars {
 	}
 
 	private void test1(String line, List<String> desired) {
-		Dissection dis = new DissectToChars();
+		Dissector dis = new DissectToChars();
 		List<String> actual = dis.dissectLine(line);
 		assertEquals("From line=“" + line + "”.  ", desired, actual);
 	}

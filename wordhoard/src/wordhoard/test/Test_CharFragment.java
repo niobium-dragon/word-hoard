@@ -24,4 +24,28 @@ public class Test_CharFragment {
 		}
 	}
 
+	@Test
+	public void testEqualsAndHashCode() throws Exception {
+		int nYes = 0, nNo = 0;
+		for (String s : Constants.strings) {
+			for (String t : Constants.strings) {
+				if (canMakeCharFragmentFrom(s) && canMakeCharFragmentFrom(t)) {
+					CharFragment ss = new CharFragment(s);
+					CharFragment tt = new CharFragment(t);
+					boolean eq = s.equals(t);
+					if (eq) {
+						nYes ++;
+					} else {
+						nNo ++;
+					}
+					boolean eeqq = ss.equals(tt);
+					assertEquals(eq, eeqq);
+					assertEquals(ss.hashCode(), s.hashCode());
+				}
+			}
+		}
+		assertTrue(nYes > 1);
+		assertTrue(nNo > 1);
+	}
+	
 }

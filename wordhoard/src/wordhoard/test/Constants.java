@@ -9,6 +9,7 @@ public class Constants {
 		null, // null often hurts. 
 		"",  // the null string does too.
 		"a",  // one character
+		"b", // another character
 		"something that is not too short", // many chars
 		"ú", // Non-ASCII unicode
 		"Ʊɲɨćǒᵭḗ ɨṩ ĵôʎ", // More exotic unicode

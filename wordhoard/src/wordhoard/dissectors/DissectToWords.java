@@ -1,13 +1,13 @@
-package wordhoard.dissection;
+package wordhoard.dissectors;
 
 import java.util.List;
 import java.util.Optional;
 
-import wordhoard.Dissection;
+import wordhoard.Dissector;
 import wordhoard.Fragment;
 import wordhoard.fragment.StringFragment;
 
-public class DissectToWords implements Dissection {
+public class DissectToWords implements Dissector {
 
 	public static String IgnoreThese = "";
 	public static String Boundary = "\\b(\\s+\\b)?"; 

@@ -9,5 +9,7 @@ public class CharFragment extends AbstractFragment {
 			throw new Exception("CharFragments must be single characters, not “" + text + "”");
 		}
 	}
+	
+
 
 }

@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import wordhoard.Dissection;
-import wordhoard.dissection.DissectToChars;
-import wordhoard.dissection.DissectToWords;
+import wordhoard.Dissector;
+import wordhoard.dissectors.DissectToChars;
+import wordhoard.dissectors.DissectToWords;
 
 public class Test_DissectToWords {
 
@@ -54,7 +54,7 @@ public class Test_DissectToWords {
 	}
 
 	private void test1(String line, List<String> desired) {
-		Dissection dis = new DissectToWords();
+		Dissector dis = new DissectToWords();
 		List<String> actual = dis.dissectLine(line);
 		assertEquals("From line=“" + line + "”.  ", desired, actual);
 	}

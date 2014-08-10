@@ -1,6 +1,6 @@
-package wordhoard.dissection;
+package wordhoard.dissectors;
 
-import wordhoard.Dissection;
+import wordhoard.Dissector;
 import wordhoard.Fragment;
 import wordhoard.fragment.CharFragment;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import bard.BardUtil;
 
-public class DissectToChars implements Dissection {
+public class DissectToChars implements Dissector {
 
 	public static String IgnoreThese = "\\s";
 	public static String Boundary = ""; 
