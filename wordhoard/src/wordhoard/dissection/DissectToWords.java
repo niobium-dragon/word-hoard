@@ -7,7 +7,7 @@ import wordhoard.Dissection;
 public class DissectToWords implements Dissection {
 
 	public static String IgnoreThese = "";
-	public static String Boundary = "\\b"; 
+	public static String Boundary = "\\b(\\s+\\b)?"; 
 	
 	@Override
 	public List<String> dissectLine(String line) {

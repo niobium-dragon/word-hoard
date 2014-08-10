@@ -18,8 +18,9 @@ public class Test_DissectToChars {
 	public void testDissectLine() {
 		test1("", new ArrayList<String>());
 		test1("abc", list("a", "b", "c"));
+		test1("Abc", list("a", "b", "c"));
 		test1("a b\t\t\t\tc", list("a", "b", "c"));
-		test1("Ʊɲɨ", list("Ʊ", "ɲ", "ɨ"));
+		test1("Ʊɲɨ", list("ʊ", "ɲ", "ɨ"));
 		test1("𐅮𨭎", list("𐅮", "𨭎")); // Astral characters — and this broke before DissectUtils.split
 	}
 

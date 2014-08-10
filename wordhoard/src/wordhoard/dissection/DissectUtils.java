@@ -53,6 +53,7 @@ public class DissectUtils {
 		return Arrays.stream(split(in, boundaryRE))
 					.filter((s) -> (s != null && !s.equals("")))
 					.filter((s) -> (!Pattern.matches(ignoreTheseRE, s)))
+					.map(String::toLowerCase) 
 					.collect(Collectors.toList());
 	}
 }
