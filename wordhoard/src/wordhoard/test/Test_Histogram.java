@@ -2,12 +2,17 @@ package wordhoard.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 import wordhoard.Corpus;
 import wordhoard.Dissector;
+import wordhoard.Fragment;
+import wordhoard.analysis.Histogram;
 import wordhoard.corpus.StringCorpus;
 import wordhoard.dissectors.DissectToChars;
+import wordhoard.fragment.CharFragment;
 
 public class Test_Histogram {
 	
@@ -16,11 +21,17 @@ public class Test_Histogram {
 
 	@Test
 	public void test() {
-		Dissector dissection = new DissectToChars();
-		Corpus alCorpus = new StringCorpus("al", alTextSample);
-		Corpus bbCorpus = new StringCorpus("bb", bbTextSample);
-		// TODO 
-		System.out.printf("∆ Finish me  - Test_Histogram\n");
+		Dissector dissector = new DissectToChars();
+		Corpus alCorpus = new StringCorpus("Alice", alTextSample);
+		
+		Histogram hist = new Histogram(dissector.dissecting(alCorpus));
+		hist.gobble();
+		assertEquals(alCorpus.name(), "Alice");
+		Map<Fragment, Long> counts = hist.getCounts();
+		assertEquals(hist.countOf("a"), 87L); // I counted
+		assertEquals(hist.countOf("-"), 4L); // I counted
+		assertEquals(hist.countOf("…"), 0L); // I counted
+		
 	}
 
 }

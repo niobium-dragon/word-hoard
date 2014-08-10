@@ -18,6 +18,12 @@ public class DissectToWords implements Dissector {
 	}
 	
 	@Override
+	public Fragment makeFragment(String s) {
+		return new StringFragment(s);
+	}
+	
+	
+	@Override
 	public Optional<Fragment> stringToFragment(String s) {
 		return Optional.of(new StringFragment(s));
 	}

@@ -20,6 +20,16 @@ public class DissectToChars implements Dissector {
 	}
 
 	@Override
+	public Fragment makeFragment(String s) {
+		try {
+		return new CharFragment(s);
+		} catch (Exception ex) {
+			System.err.println("Oh nose!  Couldn't make a CharFragment from “" + s + "” on account of " + ex);
+			return null;
+		}
+	}
+	
+	@Override
 	public Optional<Fragment> stringToFragment(String s) {
 		try {
 			return Optional.of(new CharFragment(s));
