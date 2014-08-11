@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.After;
@@ -15,7 +16,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import bard.BardUtil;
+import wordhoard.Corpus;
+import wordhoard.Dissector;
+import wordhoard.Fragment;
+import wordhoard.analysis.Histogram;
 import wordhoard.corpus.FileCorpus;
+import wordhoard.corpus.StringCorpus;
+import wordhoard.dissectors.DissectToChars;
 
 public class Test_FileCorpus {
 
@@ -48,6 +55,16 @@ public class Test_FileCorpus {
 			;
 			assertEquals(nLines, 5);
 		}
+	}
+	
+	@Test
+	public void testDissection() throws Exception {
+		Dissector dissector = new DissectToChars();
+		Corpus alCorpus = new FileCorpus("Alice", this.tmpFile);
+		Histogram hist = new Histogram(dissector.dissecting(alCorpus));
+		assertEquals(hist.countOf("a"), 15);
+		assertEquals(hist.countOf("'"), 4);
+		assertEquals(hist.countOf(":"), 1);
 	}
 
 
