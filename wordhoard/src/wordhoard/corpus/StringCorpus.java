@@ -44,6 +44,11 @@ public class StringCorpus implements Corpus {
 		return newlineRE.splitAsStream(this.getBody());
 	}
 	
+	@Override
+	public void close() throws Exception {
+		// Nothing to do.
+		
+	}
 	
 	
 }
