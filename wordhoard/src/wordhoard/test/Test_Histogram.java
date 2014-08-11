@@ -25,7 +25,6 @@ public class Test_Histogram {
 		Corpus alCorpus = new StringCorpus("Alice", alTextSample);
 		
 		Histogram hist = new Histogram(dissector.dissecting(alCorpus));
-		hist.gobble();
 		assertEquals(alCorpus.name(), "Alice");
 		Map<Fragment, Long> counts = hist.getCounts();
 		assertEquals(hist.countOf("a"), 87L); // I counted

@@ -19,6 +19,7 @@ public class Histogram{
 	public Histogram(Dissection dissection) {
 		super();
 		this.dissection = dissection;
+		this.gobble();
 	}
 	
 
@@ -33,11 +34,11 @@ public class Histogram{
 
 
 	// Read the streams, and put their info into local data structures.
-	public void gobble() {
+	private void gobble() {
 		this.counts = this.dissection.getFragStream()
 				.collect(
 						Collectors.groupingBy(
-								(x)->x, 
+								(frag)->frag, 
 								Collectors.counting()));
 	}
 	
