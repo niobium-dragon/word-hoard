@@ -15,6 +15,7 @@ public class Histogram{
 	private Dissection dissection;
 	// Recorded data.  
 	private Map<Fragment, Long> counts = new HashMap<>();
+	private long N = 0;
 
 	public Histogram(Dissection dissection) {
 		super();
@@ -40,10 +41,15 @@ public class Histogram{
 						Collectors.groupingBy(
 								(frag)->frag, 
 								Collectors.counting()));
+		this.N = this.counts.values().stream().collect(Collectors.summingLong((x)->x));
 	}
 	
 	public long countOf(String s) {
 		return this.counts.getOrDefault(this.dissection.makeFragment(s), 0L);
+	}
+	
+	public long N() {
+		return this.N;
 	}
 
 }

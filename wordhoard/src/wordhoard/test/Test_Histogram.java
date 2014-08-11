@@ -30,7 +30,9 @@ public class Test_Histogram {
 		assertEquals(hist.countOf("a"), 87L); // I counted
 		assertEquals(hist.countOf("-"), 4L); // I counted
 		assertEquals(hist.countOf("…"), 0L); // I counted
-		
+		// Check N().  Count the characters, except for the spaces.
+		String alSquish = alTextSample.replace(" ", "");
+		assertEquals(hist.N(), alSquish.length());
 	}
 
 }
