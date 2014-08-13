@@ -17,6 +17,7 @@ public class Histogram{
 	private Map<Fragment, Long> counts = new HashMap<>();
 	private long N = 0;
 	private long maxCount;
+	private double maxFrac;
 
 	public Histogram(Dissection dissection) {
 		super();
@@ -24,6 +25,10 @@ public class Histogram{
 		this.gobble();
 	}
 	
+	
+	public String name() {
+		return this.dissection.getName();
+	}
 
 	public Dissection getDissection() {
 		return dissection;
@@ -42,6 +47,9 @@ public class Histogram{
 	public long maxCount() {
 		return this.maxCount;
 	}
+	public double maxFrac() {
+		return this.maxFrac;
+	}
 
 
 	// Read the streams, and put their info into local data structures.
@@ -52,12 +60,13 @@ public class Histogram{
 								(frag)->frag, 
 								Collectors.counting()));
 		this.N = this.counts.values().stream().collect(Collectors.summingLong((x)->x));
-		long max = -1;
+		this.maxCount = -1;
+		this.maxFrac = -1;
 		// Phrasing this in streams was unduly awkward.
-		for(long n : this.counts.values()) {
-			max = Math.max(max, n);
+		for(Fragment f: this.counts.keySet()) {
+			this.maxCount = Math.max(this.maxCount, this.countOf(f.text()));
+			this.maxFrac = Math.max(this.maxFrac, this.fracOf(f.text()));
 		}
-		this.maxCount = max;
 	}
 	
 	public long countOf(String s) {

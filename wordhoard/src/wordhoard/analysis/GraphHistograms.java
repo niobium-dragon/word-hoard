@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 import org.rendersnake.HtmlCanvas;
@@ -24,7 +23,12 @@ import wordhoard.dissectors.DissectToChars;
 public class GraphHistograms {
 
 	public static void main(String[] args) throws Exception {
-		hist2("alice-in-wonderland", "the-tempest");
+		hist2(
+				"alice-in-wonderland", 
+				//"the-tempest", 
+				//"alice-looking-glass", 
+				"can-you-forgive-her"
+				);
 	}
 	
 	public static void hist1() throws IOException {
@@ -49,12 +53,8 @@ public class GraphHistograms {
 	
 	private static void hist2(String ... corporaNames) throws Exception {
 		Dissector dissector = new DissectToChars();
-		List<Histogram> hists = Stream.of(corporaNames)	
-					.map((name) -> new FileCorpus(name, Paths.get("corpora", name + ".txt")))
-					.map((corpus) -> dissector.dissecting(corpus)) // Stream<Dissection>
-					.map((dissection) -> new Histogram(dissection))  // Stream<Histogram>
-					.collect(Collectors.toList());
-				;
+		List<Histogram> hists = AnalysisTools.histogramsOfCorpora(dissector, corporaNames);
+		
 		Set<String> keyset = new HashSet<String>();
 		hists.stream().forEach((hist) -> {keyset.addAll(hist.keyStrings());});
 		System.out.printf("∆%s\n", keyset);
@@ -65,13 +65,13 @@ public class GraphHistograms {
 		
 		
 		SVGGraphics2D g2 = new SVGGraphics2D(mx, my);
-		Color[] colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN};
+		Color[] colors = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE};
 		if (corporaNames.length > colors.length) {
 			throw new RuntimeException(String.format("Crappity, I can't handle %s corpora just now.  Add more colors.", colors.length));
 		}
 		
-		long maxCount = -1;
-		for(Histogram hist : hists) maxCount = Math.max(maxCount, hist.maxCount());
+		double maxFrac = -1;
+		for(Histogram hist : hists) maxFrac = Math.max(maxFrac, hist.maxFrac());
 		
 		// We need indices here!
 		int Nj = keys.size();
@@ -79,15 +79,23 @@ public class GraphHistograms {
 			double sumFreq = 0;
 			g2.setPaint(colors[i]);
 			Histogram hist = hists.get(i);
+			int lastX = 0, lastY = 0;
 			for(int j = 0; j < Nj; j++) {
-				// x coords in 
+				// x coords in [0,1] evenly-spaced space
+				// y coords in [0,1] fraction-of-max-count space.
 				double x1 = ( (double) j) / (double) Nj;
 				double w2 = ( (double) (1)) / (double) Nj;
-				double h2 = hist.countOf(keys.get(j))/(double)maxCount;		
+				String s = keys.get(j);
+				double h2 = hist.fracOf(s) / maxFrac;
 				double y1 = 1.0 - h2;
-				sumFreq += hist.fracOf(keys.get(j));
+				int thisX = rx2x(x1);
+				int thisY = ry2y(y1);
+				sumFreq += hist.fracOf(s);
 				int ih2 =  ry2y(h2);
-				g2.draw(new Rectangle(rx2x(x1), ry2y(y1), rx2x(w2), ih2));
+//				g2.draw(new Rectangle(rx2x(x1), ry2y(y1), rx2x(w2), ih2));
+				g2.drawLine(lastX, lastY, thisX, thisY);
+				g2.drawString(s, thisX, my-4);
+				lastX = thisX; lastY = thisY;
 			}
 			System.out.printf("∆sumFreq=%g\n", sumFreq);
 		}
@@ -112,7 +120,7 @@ public class GraphHistograms {
 		}
 			
 	}
-	
+
 	public static void exemplar() throws IOException {
 		// SVG stuff
 		SVGGraphics2D g2 = new SVGGraphics2D(300, 200);

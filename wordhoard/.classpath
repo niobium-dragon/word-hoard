@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="/Users/bard/xperiment/gitexp/wordhoard/jars/rendersnake-1.7.3/jars/rendersnake-1.7.3-sources.jar"/>
 	<classpathentry kind="lib" path="/Users/bard/xperiment/gitexp/wordhoard/jars/rendersnake-1.7.3/jars/rendersnake-1.7.3.jar" sourcepath="/Users/bard/xperiment/gitexp/wordhoard/jars/rendersnake-1.7.3/jars/rendersnake-1.7.3-sources.jar"/>
 	<classpathentry kind="lib" path="/Users/bard/xperiment/gitexp/wordhoard/jars/commons-lang3-3.3.2/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="/Users/bard/xperiment/gitexp/wordhoard/jars/commons-math3-3.3/commons-math3-3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
